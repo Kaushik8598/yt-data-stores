@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { CommonPageHeader } from "@/components/common/common-page-header";
 import { CommonCard } from "@/components/common/common-card";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
+import { ChannelSelector } from "@/components/analytics/channel-selector";
 import { formatFriendlyDateTime, formatTimeAgo } from "@/lib/utils/date";
 import {
   Video,
@@ -82,7 +83,10 @@ export default async function DashboardPage() {
             </nav>
           </div>
 
-          <DashboardHeader user={user} />
+          <div className="flex items-center gap-3">
+            <ChannelSelector />
+            <DashboardHeader user={user} />
+          </div>
         </div>
       </header>
 
@@ -94,20 +98,21 @@ export default async function DashboardPage() {
           description={`Welcome back, ${user?.user_metadata?.full_name ?? user?.email ?? "User"}`}
           action={
             <div className="flex items-center gap-2">
-              <Link href="/analytics">
-                <CommonButton
-                  variant="outline"
-                  leftIcon={<BarChart3 className="size-4 text-red-500" />}
-                  size="sm"
-                >
-                  US Analytics & Upload Time
-                </CommonButton>
-              </Link>
-              <Link href="#add-store">
-                <CommonButton leftIcon={<Layers className="size-4" />} size="sm">
-                  Add YouTube Store
-                </CommonButton>
-              </Link>
+              <CommonButton
+                href="/analytics"
+                variant="outline"
+                leftIcon={<BarChart3 className="size-4 text-red-500" />}
+                size="sm"
+              >
+                US Analytics & Upload Time
+              </CommonButton>
+              <CommonButton
+                href="#add-store"
+                leftIcon={<Layers className="size-4" />}
+                size="sm"
+              >
+                Add YouTube Store
+              </CommonButton>
             </div>
           }
         />

@@ -33,23 +33,17 @@ export default async function Home() {
 
           <div className="flex items-center gap-3">
             {user ? (
-              <Link href="/dashboard">
-                <CommonButton rightIcon={<ArrowRight className="size-4" />} size="sm">
-                  Go to Dashboard
-                </CommonButton>
-              </Link>
+              <CommonButton href="/dashboard" rightIcon={<ArrowRight className="size-4" />} size="sm">
+                Go to Dashboard
+              </CommonButton>
             ) : (
               <>
-                <Link href="/login">
-                  <CommonButton variant="ghost" size="sm">
-                    Sign In
-                  </CommonButton>
-                </Link>
-                <Link href="/register">
-                  <CommonButton size="sm" rightIcon={<ArrowRight className="size-4" />}>
-                    Get Started
-                  </CommonButton>
-                </Link>
+                <CommonButton href="/login" variant="ghost" size="sm">
+                  Sign In
+                </CommonButton>
+                <CommonButton href="/register" size="sm" rightIcon={<ArrowRight className="size-4" />}>
+                  Get Started
+                </CommonButton>
               </>
             )}
           </div>
@@ -81,23 +75,17 @@ export default async function Home() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-4">
             {user ? (
-              <Link href="/dashboard" className="w-full sm:w-auto">
-                <CommonButton size="lg" className="w-full sm:w-auto px-8" rightIcon={<LayoutDashboard className="size-4" />}>
-                  Open Dashboard
-                </CommonButton>
-              </Link>
+              <CommonButton href="/dashboard" size="lg" className="w-full sm:w-auto px-8" rightIcon={<LayoutDashboard className="size-4" />}>
+                Open Dashboard
+              </CommonButton>
             ) : (
               <>
-                <Link href="/register" className="w-full sm:w-auto">
-                  <CommonButton size="lg" className="w-full sm:w-auto px-8" rightIcon={<ArrowRight className="size-4" />}>
-                    Create Free Account
-                  </CommonButton>
-                </Link>
-                <Link href="/login" className="w-full sm:w-auto">
-                  <CommonButton size="lg" variant="outline" className="w-full sm:w-auto px-8">
-                    Sign In
-                  </CommonButton>
-                </Link>
+                <CommonButton href="/register" size="lg" className="w-full sm:w-auto px-8" rightIcon={<ArrowRight className="size-4" />}>
+                  Create Free Account
+                </CommonButton>
+                <CommonButton href="/login" size="lg" variant="outline" className="w-full sm:w-auto px-8">
+                  Sign In
+                </CommonButton>
               </>
             )}
           </div>

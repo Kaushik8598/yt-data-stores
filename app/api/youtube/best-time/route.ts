@@ -1,9 +1,11 @@
 import { apiSuccess, apiError } from "@/lib/api/response";
-import { getYouTubeAnalytics } from "@/lib/youtube/analytics-service";
+import { fetchChannelAnalytics } from "@/lib/youtube/analytics-service";
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
-    const analytics = getYouTubeAnalytics();
+    const { searchParams } = new URL(request.url);
+    const channelId = searchParams.get("channelId") ?? undefined;
+    const analytics = await fetchChannelAnalytics(channelId);
     return apiSuccess(
       {
         bestTime: analytics?.bestTime,

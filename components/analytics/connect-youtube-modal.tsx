@@ -45,12 +45,12 @@ export function ConnectYouTubeModal({
       open={open}
       onOpenChange={onOpenChange}
       title={
-        <div className="flex items-center gap-2">
-          <div className="size-8 rounded-lg bg-red-600 flex items-center justify-center text-white">
+        <span className="flex items-center gap-2">
+          <span className="size-8 rounded-lg bg-red-600 inline-flex items-center justify-center text-white shrink-0">
             <Video className="size-4" />
-          </div>
+          </span>
           <span>Connect YouTube Channel</span>
-        </div>
+        </span>
       }
       description="Connect your YouTube account to fetch live private analytics & real-time US viewer metrics"
       maxWidth="md"
@@ -60,7 +60,7 @@ export function ConnectYouTubeModal({
         <div className="p-4 rounded-xl border border-red-500/20 bg-red-500/5 space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold text-foreground flex items-center gap-1.5">
-              <ShieldCheck className="size-4 text-emerald-500" /> Recommended: Google OAuth 2.0
+               <ShieldCheck className="size-4 text-emerald-500" /> Recommended: Google OAuth 2.0
             </span>
             <span className="text-[10px] bg-emerald-500/10 text-emerald-500 font-semibold px-2 py-0.5 rounded">
               Secure
@@ -70,13 +70,8 @@ export function ConnectYouTubeModal({
             Allows real-time access to YouTube Analytics API for private retention curves, exact US states, and hourly subscriber activity.
           </p>
           <CommonButton
-            className="w-full bg-red-600 hover:bg-red-700 text-white"
-            onClick={() => {
-              toast.info("Google OAuth Flow", {
-                description:
-                  "To enable OAuth live, add GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET in .env.local",
-              });
-            }}
+            href="/api/youtube/auth?returnUrl=/analytics"
+            className="w-full bg-red-600 hover:bg-red-700 text-white cursor-pointer justify-center"
           >
             Sign In with YouTube (Google)
           </CommonButton>

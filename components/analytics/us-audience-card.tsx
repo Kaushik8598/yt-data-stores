@@ -14,9 +14,14 @@ export function USAudienceCard({ geography = [] }: USAudienceCardProps) {
       title="Audience Geography Breakdown"
       description="Top countries by viewer engagement & watch time"
     >
-      <div className="space-y-4 pt-2">
-        {geography.map((country) => {
-          const isUS = country.countryCode === "US";
+      {geography.length === 0 ? (
+        <div className="py-8 text-center text-xs text-muted-foreground">
+          No geographic viewer data available yet for this channel.
+        </div>
+      ) : (
+        <div className="space-y-4 pt-2">
+          {geography.map((country) => {
+            const isUS = country.countryCode === "US";
 
           return (
             <div key={country.countryCode} className="space-y-1.5">
@@ -58,6 +63,7 @@ export function USAudienceCard({ geography = [] }: USAudienceCardProps) {
           );
         })}
       </div>
+      )}
     </CommonCard>
   );
 }

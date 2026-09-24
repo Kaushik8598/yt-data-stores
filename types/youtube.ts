@@ -1,3 +1,15 @@
+export interface ConnectedYouTubeChannel {
+  id: string;
+  channelId: string;
+  channelTitle: string;
+  customUrl?: string;
+  thumbnailUrl?: string;
+  subscriberCount: number;
+  videoCount: number;
+  viewCount: number;
+  isSelected: boolean;
+}
+
 export interface ChannelOverview {
   channelId: string;
   channelTitle: string;
@@ -46,9 +58,12 @@ export interface DayActivityHeatmap {
 }
 
 export interface YouTubeAnalyticsResponse {
-  overview: ChannelOverview;
+  hasConnectedChannel: boolean;
+  channels: ConnectedYouTubeChannel[];
+  selectedChannel: ConnectedYouTubeChannel | null;
+  overview: ChannelOverview | null;
   geography: CountryAudience[];
-  bestTime: BestTimeRecommendation;
+  bestTime: BestTimeRecommendation | null;
   weeklyHeatmap: DayActivityHeatmap[];
   usAudiencePercentage: number;
 }

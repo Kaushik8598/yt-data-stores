@@ -1,8 +1,11 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { DashboardHeader } from "@/components/dashboard/dashboard-header";
 import { AnalyticsDashboardView } from "@/components/analytics/analytics-dashboard-view";
+import { ChannelSelector } from "@/components/analytics/channel-selector";
+import { CommonLoader } from "@/components/common/common-loader";
 import { Video, BarChart3, LayoutDashboard } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -48,13 +51,24 @@ export default async function AnalyticsPage() {
             </nav>
           </div>
 
-          <DashboardHeader user={user} />
+          <div className="flex items-center gap-3">
+            <ChannelSelector />
+            <DashboardHeader user={user} />
+          </div>
         </div>
       </header>
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <AnalyticsDashboardView />
+        <Suspense
+          fallback={
+            <div className="py-20">
+              <CommonLoader size="lg" text="Loading YouTube analytics & channel data..." />
+            </div>
+          }
+        >
+          <AnalyticsDashboardView />
+        </Suspense>
       </main>
     </div>
   );
