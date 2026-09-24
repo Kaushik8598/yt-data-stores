@@ -14,6 +14,8 @@ import {
   Calendar,
   Layers,
   ArrowUpRight,
+  BarChart3,
+  LayoutDashboard,
 } from "lucide-react";
 import Link from "next/link";
 import { CommonButton } from "@/components/common/common-button";
@@ -24,10 +26,14 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.auth.getUser();
+    user = data?.user ?? null;
+  } catch {
+    user = null;
+  }
 
   if (!user) {
     redirect("/login");
@@ -50,12 +56,31 @@ export default async function DashboardPage() {
       {/* Top Navbar */}
       <header className="sticky top-0 z-40 border-b border-border/80 bg-background/95 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <Link href="/dashboard" className="flex items-center gap-2.5 font-bold text-lg">
-            <div className="size-8 rounded-lg bg-red-600 flex items-center justify-center text-white shadow-sm shadow-red-600/30">
-              <Video className="size-4" />
-            </div>
-            <span>YT Data Stores</span>
-          </Link>
+          <div className="flex items-center gap-6">
+            <Link href="/dashboard" className="flex items-center gap-2.5 font-bold text-lg">
+              <div className="size-8 rounded-lg bg-red-600 flex items-center justify-center text-white shadow-sm shadow-red-600/30">
+                <Video className="size-4" />
+              </div>
+              <span>YT Data Stores</span>
+            </Link>
+
+            <nav className="hidden md:flex items-center gap-1 text-sm font-medium">
+              <Link
+                href="/dashboard"
+                className="px-3 py-1.5 rounded-lg bg-muted text-foreground transition-colors flex items-center gap-1.5 font-semibold"
+              >
+                <LayoutDashboard className="size-4" />
+                <span>Overview</span>
+              </Link>
+              <Link
+                href="/analytics"
+                className="px-3 py-1.5 rounded-lg text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors flex items-center gap-1.5"
+              >
+                <BarChart3 className="size-4 text-red-500" />
+                <span>Analytics & Best Time</span>
+              </Link>
+            </nav>
+          </div>
 
           <DashboardHeader user={user} />
         </div>
@@ -68,11 +93,22 @@ export default async function DashboardPage() {
           title="Dashboard"
           description={`Welcome back, ${user?.user_metadata?.full_name ?? user?.email ?? "User"}`}
           action={
-            <Link href="#add-store">
-              <CommonButton leftIcon={<Layers className="size-4" />} size="sm">
-                Add YouTube Store
-              </CommonButton>
-            </Link>
+            <div className="flex items-center gap-2">
+              <Link href="/analytics">
+                <CommonButton
+                  variant="outline"
+                  leftIcon={<BarChart3 className="size-4 text-red-500" />}
+                  size="sm"
+                >
+                  US Analytics & Upload Time
+                </CommonButton>
+              </Link>
+              <Link href="#add-store">
+                <CommonButton leftIcon={<Layers className="size-4" />} size="sm">
+                  Add YouTube Store
+                </CommonButton>
+              </Link>
+            </div>
           }
         />
 

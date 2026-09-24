@@ -30,11 +30,13 @@ export async function updateSession(request: NextRequest) {
     },
   });
 
-  // IMPORTANT: DO NOT remove getUser() call here.
-  // It ensures the user session is validated and refreshed properly.
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  let user = null;
+  try {
+    const { data } = await supabase.auth.getUser();
+    user = data?.user ?? null;
+  } catch {
+    user = null;
+  }
 
   const pathname = request.nextUrl.pathname;
 
