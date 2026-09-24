@@ -29,13 +29,13 @@ export async function apiClient<T>(
 
   const json: ApiResponse<T> = await response.json();
 
-  if (!response.ok || !json.success) {
+  if (!response?.ok || !json?.success) {
     throw new ApiClientError(
-      json.message || "Failed to fetch data",
-      response.status,
-      json.errors
+      json?.message ?? "Failed to fetch data",
+      response?.status ?? 500,
+      json?.errors
     );
   }
 
-  return json.data as T;
+  return json?.data as T;
 }

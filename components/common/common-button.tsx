@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { Button, buttonVariants } from "@/components/ui/button";
-import { Loader2, type LucideIcon } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { VariantProps } from "class-variance-authority";
 
@@ -11,8 +11,8 @@ export interface CommonButtonProps
     VariantProps<typeof buttonVariants> {
   isLoading?: boolean;
   loadingText?: string;
-  leftIcon?: LucideIcon | React.ReactNode;
-  rightIcon?: LucideIcon | React.ReactNode;
+  leftIcon?: React.ReactNode;
+  rightIcon?: React.ReactNode;
 }
 
 export const CommonButton = React.forwardRef<HTMLButtonElement, CommonButtonProps>(
@@ -22,8 +22,8 @@ export const CommonButton = React.forwardRef<HTMLButtonElement, CommonButtonProp
       className,
       isLoading = false,
       loadingText,
-      leftIcon: LeftIcon,
-      rightIcon: RightIcon,
+      leftIcon,
+      rightIcon,
       disabled,
       variant = "default",
       size = "default",
@@ -31,16 +31,6 @@ export const CommonButton = React.forwardRef<HTMLButtonElement, CommonButtonProp
     },
     ref
   ) => {
-    // Render icon helper
-    const renderIcon = (icon: LucideIcon | React.ReactNode) => {
-      if (!icon) return null;
-      if (typeof icon === "function" || (typeof icon === "object" && "render" in (icon as object))) {
-        const IconComponent = icon as LucideIcon;
-        return <IconComponent className="size-4 shrink-0" />;
-      }
-      return icon;
-    };
-
     return (
       <Button
         ref={ref}
@@ -57,9 +47,9 @@ export const CommonButton = React.forwardRef<HTMLButtonElement, CommonButtonProp
           </>
         ) : (
           <>
-            {LeftIcon && <span className="mr-1.5 inline-flex">{renderIcon(LeftIcon)}</span>}
+            {leftIcon && <span className="mr-1.5 inline-flex items-center">{leftIcon}</span>}
             {children}
-            {RightIcon && <span className="ml-1.5 inline-flex">{renderIcon(RightIcon)}</span>}
+            {rightIcon && <span className="ml-1.5 inline-flex items-center">{rightIcon}</span>}
           </>
         )}
       </Button>
