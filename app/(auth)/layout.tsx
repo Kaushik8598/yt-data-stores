@@ -46,7 +46,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
         </div>
 
         {/* Footer info */}
-        <div className="relative z-10 text-xs text-zinc-500">
+        <div className="relative z-10 text-xs text-zinc-500" suppressHydrationWarning>
           © {new Date().getFullYear()} YT Data Stores. Built with Next.js & Shadcn UI.
         </div>
       </div>

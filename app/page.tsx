@@ -65,7 +65,7 @@ export default async function Home() {
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-muted/80 border border-border text-foreground">
             <Sparkles className="size-3.5 text-amber-500" />
             <span>Built with Next.js App Router, Supabase & Shadcn UI</span>
-            <span className="text-muted-foreground">• {currentDate}</span>
+            <span className="text-muted-foreground" suppressHydrationWarning>• {currentDate}</span>
           </div>
 
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-foreground leading-[1.15]">
@@ -139,7 +139,7 @@ export default async function Home() {
 
       {/* Footer */}
       <footer className="border-t border-border/60 py-6 text-center text-xs text-muted-foreground">
-        <p>© {new Date().getFullYear()} YT Data Stores. All rights reserved.</p>
+        <p suppressHydrationWarning>© {new Date().getFullYear()} YT Data Stores. All rights reserved.</p>
       </footer>
     </div>
   );
