@@ -11,17 +11,17 @@ interface BestUploadTimeCardProps {
 export function BestUploadTimeCard({
   recommendation,
 }: BestUploadTimeCardProps) {
-  const day = recommendation?.dayOfWeek ?? "Today";
-  const timeIST = recommendation?.bestTimeIST ?? "09:00 PM - 11:30 PM IST";
-  const timeEST = recommendation?.bestTimeEST ?? "11:30 AM - 02:00 PM EST";
-  const timePST = recommendation?.bestTimePST ?? "08:30 AM - 11:00 AM PST";
-  const confidence = recommendation?.confidenceScore ?? 94;
+  const day = recommendation?.dayOfWeek ?? "Optimal Day";
+  const timeIST = recommendation?.bestTimeIST ?? "--:--";
+  const timeEST = recommendation?.bestTimeEST ?? "--:--";
+  const timePST = recommendation?.bestTimePST ?? "--:--";
+  const confidence = recommendation?.confidenceScore ?? 0;
   const reason =
     recommendation?.reason ??
-    "Peak US viewers become active during late afternoon and evening hours (EST). Uploading 2 hours ahead ensures full transcoding and optimal algorithm push.";
+    "Calculated based on your channel's viewership telemetry.";
   const boost =
     recommendation?.expectedEngagementBoost ??
-    "+38% more initial click-throughs within first 4 hours";
+    "Optimal audience engagement window";
 
   return (
     <CommonCard

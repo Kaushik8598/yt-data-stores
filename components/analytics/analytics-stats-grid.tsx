@@ -10,7 +10,7 @@ interface AnalyticsStatsGridProps {
 
 export function AnalyticsStatsGrid({
   overview,
-  usPercentage = 54.2,
+  usPercentage = 0,
 }: AnalyticsStatsGridProps) {
   const totalViews = overview?.totalViews?.toLocaleString() ?? "0";
   const engagedViews = overview?.engagedViews?.toLocaleString() ?? "0";
@@ -19,7 +19,7 @@ export function AnalyticsStatsGrid({
 
   const engagementRatio = overview?.totalViews
     ? Math.round((overview.engagedViews / overview.totalViews) * 100)
-    : 69;
+    : 0;
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -40,9 +40,8 @@ export function AnalyticsStatsGrid({
         <div className="text-3xl font-extrabold tracking-tight text-foreground">
           {totalViews}
         </div>
-        <div className="flex items-center gap-1.5 text-xs text-emerald-500 font-medium mt-1.5">
-          <span>↑ 18.4%</span>
-          <span className="text-muted-foreground">vs previous 28 days</span>
+        <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1.5">
+          <span>Channel total views</span>
         </div>
       </CommonCard>
 
@@ -51,7 +50,7 @@ export function AnalyticsStatsGrid({
         cardClassName="border-border/70 hover:border-emerald-500/30 transition-colors"
         title={
           <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-            Engaged Views
+            Engaged Interactions
           </span>
         }
         headerAction={
@@ -65,7 +64,7 @@ export function AnalyticsStatsGrid({
         </div>
         <div className="flex items-center gap-1.5 text-xs text-muted-foreground mt-1.5">
           <span className="font-semibold text-foreground">{engagementRatio}%</span>
-          <span>viewer retention rate</span>
+          <span>engagement rate</span>
         </div>
       </CommonCard>
 
